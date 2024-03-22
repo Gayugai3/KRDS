@@ -1,0 +1,18 @@
+.mobile-header {
+  display: none; /* Hide the header by default */
+}
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: block; /* Show the header on mobile screens */
+    background-color: #ffffff;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 40px;
+  }
+}
