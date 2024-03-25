@@ -93,108 +93,7 @@
   text-transform: uppercase;
 }
 
-.arrow,
-.scroll-button {
-  display: none;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  color: #e9f8ee;
-  cursor: pointer;
-}
-
-.left-arrow {
-  left: 10px;
-}
-
-.right-arrow {
-  right: 10px;
-  /* transform: translateX(-currentCardIndex * 100%); */
-}
-
-/* Scroll button styles */
-.scroll-button {
-  display: none;
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.7);
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.navigation-manual {
-  display: none; /* Initially hide the navigation-manual */
-}
-
 @media (max-width: 767.98px) {
-  .navigation-manual {
-    position: absolute;
-    width: 8px;
-    margin-top: 650px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 30%;
-  }
-
-  .manual-btn {
-    border: 2px solid #fcffff;
-    padding: 5px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.1s;
-  }
-
-  .manual-btn:not(:last-child) {
-    margin-right: 5px;
-  }
-
-  .manual-btn:hover {
-    background: #f6f6f6;
-  }
-
-  #radio1:checked ~ .first {
-    margin-left: 0;
-  }
-
-  #radio2:checked ~ .first {
-    margin-left: -20%;
-  }
-
-  #radio3:checked ~ .first {
-    margin-left: -40%;
-  }
-
-  #radio4:checked ~ .first {
-    margin-left: -60%;
-  }
-
-  .arrow,
-  .scroll-button {
-    display: block;
-  }
-  .arrow::after,
-  .scroll-button::after {
-    visibility: hidden;
-  }
-
-  .card.active {
-    border: 2px solid #ff0000;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    transform: translateX(calc((100% + 0px) * -1 * var(--active-index)));
-  }
-
   .corner-image {
     filter: grayscale(100%) invert(100%) brightness(0) sepia(100%)
       hue-rotate(180deg);
@@ -207,7 +106,6 @@
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    width: 100vw;
   }
 
   .card {
@@ -234,9 +132,9 @@
   }
 
   .rotate-image {
-    transform: rotateY(1deg);
+    transform: rotateY(2deg);
     margin-left: 15%;
-    height: 200px;
+    margin-top: 3%;
   }
 
   .card-content {
@@ -283,14 +181,6 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .arrow,
-  .scroll-button {
-    display: block;
-  }
-  .arrow::after,
-  .scroll-button::after {
-    visibility: hidden;
-  }
 
   .corner-image {
     filter: grayscale(100%) invert(100%) brightness(0) sepia(100%)

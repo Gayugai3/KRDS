@@ -9,13 +9,13 @@ body {
 
 #root {
   flex-grow: 1;
-  display: flex;
+  /* display: flex; */
 }
 
 .App {
   text-align: center;
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   justify-content: flex-start;
 }
 
@@ -23,25 +23,85 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* max-height: 100vh; */
+  height: 100%;
 }
 
 @media (max-width: 768px) {
+  .slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: transparent;
+    background-color: white;
+  }
+
+  .slick-dots li button:before {
+    font-family: "slick";
+    font-size: 6px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    content: "•";
+    text-align: center;
+    opacity: 1;
+    color: transparent;
+    -moz-osx-font-smoothing: grayscale;
+    border: 0.5px solid white;
+    border-radius: 50px;
+  }
+
+  .slick-dots {
+    position: relative;
+    top: -170px;
+    color: white;
+  }
+
+  .slick-dots li {
+    margin: 0 5px;
+  }
+
+  .slick-dots li button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 0.5px solid transparent;
+    font-weight: bolder;
+  }
+
+  .slick-prev {
+    height: 10%;
+    width: 10%;
+    left: 5px;
+    color: rgb(255, 251, 251);
+    border: black;
+    z-index: 1;
+  }
+
+  .slick-next {
+    height: 10%;
+    width: 10%;
+    right: 5px;
+    color: rgb(255, 251, 251);
+    border: black;
+    z-index: 1;
+  }
+
+  .slick-prev:hover,
+  .slick-next:hover {
+    color: #bbb;
+  }
+  .slick-prev:focus,
+  .slick-next:focus {
+    color: white;
+  }
   .card-container {
     display: flex;
-    overflow-x: scroll;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-  }
-  .dotsContainerStyles {
-    display: flex;
-    justify-content: center;
-  }
-  .dotStyle {
-    margin: 0 3px;
-    cursor: pointer;
-    font-size: 20px;
-    padding-bottom: 10px;
+    /* height: 100%; */
   }
 }

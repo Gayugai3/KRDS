@@ -1,15 +1,21 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import Card from "./components/Card";
 import Header from "./components/mobileHeader";
 import "./styles/mobileHeader.css";
+import Slider from "react-slick";
+import { SlArrowRight } from "react-icons/sl";
+import { SlArrowLeft } from "react-icons/sl";
 
 function App() {
   const [cardsData, setCardsData] = useState([]);
   const [logo, setLogo] = useState("");
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
   const colors = [
     "#41ca6e",
     "#fab153",
@@ -25,7 +31,6 @@ function App() {
         const response = await axios.get(
           "https://krds-assignment.github.io/aoc/api-assets/data.json"
         );
-        // console.log(response.data.logo);
         setLogo(response.data.logo);
         setCardsData(response.data.features);
       } catch (error) {
@@ -33,50 +38,69 @@ function App() {
       }
     }
     fetchData();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const goToNextCard = () => {
-    const isLastSlide = currentCardIndex === cardsData.length - 1;
-    const newIndex = isLastSlide ? 0 : currentCardIndex + 1;
-    setCurrentCardIndex(newIndex);
-    console.log(currentCardIndex);
-  };
-
-  const goToPreviousCard = () => {
-    const isFirstSlide = currentCardIndex === 0;
-    const newIndex = isFirstSlide ? cardsData.length - 1 : currentCardIndex - 1;
-    setCurrentCardIndex(newIndex);
-    console.log(newIndex);
-  };
-
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--active-index",
-      currentCardIndex
-    );
-  }, [currentCardIndex]);
+    setIsMobile(window.innerWidth <= 768);
+  }, [window.innerWidth]);
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  console.log("isMobile:", isMobile);
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    nextArrow: <SlArrowRight />,
+    prevArrow: <SlArrowLeft />,
+  };
   return (
     <div className="App">
       <Header logo={logo} />
-      <div className="card-container">
-        {Array.isArray(cardsData) &&
-          cardsData.map((card, index) => (
-            <>
-              <Card
-                key={index}
-                data={card}
-                color={colors[index]}
-                index={index}
-                logo={logo}
-                isActive={index === currentCardIndex}
-                onNext={goToNextCard}
-                onPrevious={goToPreviousCard}
-                setCurrentCardIndex={setCurrentCardIndex}
-              />
-            </>
-          ))}
-      </div>
+
+      {!isMobile ? (
+        <div className="card-container">
+          {Array.isArray(cardsData) &&
+            cardsData.map((card, index) => (
+              <>
+                <Card
+                  key={index}
+                  data={card}
+                  color={colors[index]}
+                  index={index}
+                  logo={logo}
+                />
+              </>
+            ))}{" "}
+        </div>
+      ) : (
+        <div className="slider-container">
+          <Slider {...settings}>
+            {Array.isArray(cardsData) &&
+              cardsData.map((card, index) => (
+                <div key={index}>
+                  <Card
+                    data={card}
+                    color={colors[index]}
+                    index={index}
+                    logo={logo}
+                  />
+                </div>
+              ))}
+          </Slider>
+        </div>
+      )}
     </div>
   );
 }
